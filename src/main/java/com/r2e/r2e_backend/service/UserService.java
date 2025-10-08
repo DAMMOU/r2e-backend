@@ -1,26 +1,16 @@
 package com.r2e.r2e_backend.service;
 
+import com.r2e.r2e_backend.dto.request.RegisterRequest;
 import com.r2e.r2e_backend.entity.User;
-import com.r2e.r2e_backend.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService {
+import java.util.List;
+import java.util.Optional;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    public User registerUser(User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email déjà utilisé");
-        }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
-    }
+public interface UserService {
+    User registerUser(RegisterRequest registerRequest);
+    Optional<User> findByEmail(String email);
+    List<User> findAllUsers();
+    User findById(Long id);
+    void deleteUser(Long id);
+    boolean existsByEmail(String email);
 }
