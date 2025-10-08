@@ -20,16 +20,23 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Initialiser les rôles
-        initializeRoles();
+        System.out.println("🚀 Début de l'initialisation des données...");
 
-        // Initialiser un utilisateur admin
-        initializeAdminUser();
+        try {
+            // Initialiser les rôles
+            initializeRoles();
 
-        // Initialiser un utilisateur user
-        initializeTestUser();
+            // Initialiser un utilisateur admin
+            initializeAdminUser();
 
-        System.out.println("Initialisation des données terminée !");
+            // Initialiser un utilisateur user
+            initializeTestUser();
+
+            System.out.println("✅ Initialisation des données terminée !");
+        } catch (Exception e) {
+            System.err.println("❌ Erreur lors de l'initialisation: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void initializeRoles() {
@@ -38,7 +45,9 @@ public class DataInitializer implements CommandLineRunner {
             Role userRole = new Role();
             userRole.setName(ERole.ROLE_USER);
             roleRepository.save(userRole);
-            System.out.println("Rôle ROLE_USER créé");
+            System.out.println("✅ Rôle ROLE_USER créé");
+        } else {
+            System.out.println("ℹ️ Rôle ROLE_USER existe déjà");
         }
 
         // Vérifier et créer le rôle ADMIN
@@ -46,7 +55,9 @@ public class DataInitializer implements CommandLineRunner {
             Role adminRole = new Role();
             adminRole.setName(ERole.ROLE_ADMIN);
             roleRepository.save(adminRole);
-            System.out.println("Rôle ROLE_ADMIN créé");
+            System.out.println("✅ Rôle ROLE_ADMIN créé");
+        } else {
+            System.out.println("ℹ️ Rôle ROLE_ADMIN existe déjà");
         }
 
         // Vérifier et créer le rôle STUDENT
@@ -54,7 +65,9 @@ public class DataInitializer implements CommandLineRunner {
             Role studentRole = new Role();
             studentRole.setName(ERole.ROLE_STUDENT);
             roleRepository.save(studentRole);
-            System.out.println("Rôle ROLE_STUDENT créé");
+            System.out.println("✅ Rôle ROLE_STUDENT créé");
+        } else {
+            System.out.println("ℹ️ Rôle ROLE_STUDENT existe déjà");
         }
 
         // Vérifier et créer le rôle PROFESSOR
@@ -62,7 +75,9 @@ public class DataInitializer implements CommandLineRunner {
             Role professorRole = new Role();
             professorRole.setName(ERole.ROLE_PROFESSOR);
             roleRepository.save(professorRole);
-            System.out.println("Rôle ROLE_PROFESSOR créé");
+            System.out.println("✅ Rôle ROLE_PROFESSOR créé");
+        } else {
+            System.out.println("ℹ️ Rôle ROLE_PROFESSOR existe déjà");
         }
     }
 
@@ -84,9 +99,9 @@ public class DataInitializer implements CommandLineRunner {
             adminUser.setTerms(true);
 
             userRepository.save(adminUser);
-            System.out.println("Utilisateur admin créé - Email: admin@r2e.com / Mot de passe: admin123");
+            System.out.println("✅ Utilisateur admin créé - Email: admin@r2e.com / Mot de passe: admin123");
         } else {
-            System.out.println("Utilisateur admin existe déjà");
+            System.out.println("ℹ️ Utilisateur admin existe déjà");
         }
     }
 
@@ -109,9 +124,9 @@ public class DataInitializer implements CommandLineRunner {
             testUser.setTerms(true);
 
             userRepository.save(testUser);
-            System.out.println("Utilisateur test créé - Email: user@r2e.com / Mot de passe: user123");
+            System.out.println("✅ Utilisateur test créé - Email: user@r2e.com / Mot de passe: user123");
         } else {
-            System.out.println("Utilisateur test existe déjà");
+            System.out.println("ℹ️ Utilisateur test existe déjà");
         }
     }
 }
