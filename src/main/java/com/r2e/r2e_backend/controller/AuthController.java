@@ -21,6 +21,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin(origins = {"http://localhost:4200", "https://r2e-frontend.netlify.app"},  allowCredentials = "true")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
